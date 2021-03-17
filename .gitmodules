@@ -1,0 +1,6 @@
+[submodule "submodules/box2d"]
+	path = submodules/box2d
+	url = https://github.com/jazzbre/box2d.git
+[submodule "submodules/bx"]
+	path = submodules/bx
+	url = https://github.com/bkaradzic/bx.git

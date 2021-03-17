@@ -1,0 +1,6 @@
+FileVersion = 1
+Dependencies = {corlib = "*", box2d-beef = "*"}
+
+[Project]
+Name = "example"
+StartupObject = "example.Program"

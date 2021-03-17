@@ -1,0 +1,5 @@
+.build/
+BeefSpace_User.toml
+build/
+recovery/
+*.ini

@@ -1,0 +1,5 @@
+FileVersion = 1
+Projects = {example = {Path = "example"}, box2d-beef = {Path = "."}}
+
+[Workspace]
+StartupProject = "example"
