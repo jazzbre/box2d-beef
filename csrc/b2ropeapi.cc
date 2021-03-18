@@ -1,7 +1,7 @@
 #include "box2dapi.h"
 #include "box2d/b2_rope.h"
 
-#define B2ROPE(_ret_, _name_, ...) BOX2DCAPI _ret_ b2Rope##_name_(b2Rope* rope, ##__VA_ARGS__)
+#define B2ROPE(_ret_, _name_, ...) BOX2DCAPI _ret_ b2Rope_##_name_(b2Rope* rope, ##__VA_ARGS__)
 
 BOX2DCAPI b2Rope* b2Rope_Create(const b2RopeDef& def) {
     b2Rope* rope = new b2Rope();
@@ -29,8 +29,8 @@ B2ROPE(int32, GetPointCount) {
     return rope->m_count;
 }
 
-B2ROPE(b2Vec2, GetPointPosition, int v) {
-    return rope->m_ps[v];
+B2ROPE(b2Vec2_C, GetPointPosition, int v) {
+    RETURNPOD(b2Vec2_C, rope->m_ps[v]);
 }
 
 B2ROPE(float, GetPointInvMass, int v) {

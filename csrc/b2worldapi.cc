@@ -11,10 +11,10 @@ public:
     using ParticleSystemSayGoodbyeCallback = void (*)(b2ParticleSystem* particleSystem, int32 index, void* userData);
 
     struct Callbacks {
-        JointSayGoodbyeCallback jointSayGoodbyeCallback = nullptr;
-        FixtureSayGoodbyeCallback fixterSayGoodbyeCallback = nullptr;
-        ParticleGroupSayGoodbyeCallback particleGroupSayGoodbyeCallback = nullptr;
-        ParticleSystemSayGoodbyeCallback particleSystemSayGoodbyeCallback = nullptr;
+        JointSayGoodbyeCallback jointSayGoodbyeCallback;
+        FixtureSayGoodbyeCallback fixterSayGoodbyeCallback;
+        ParticleGroupSayGoodbyeCallback particleGroupSayGoodbyeCallback;
+        ParticleSystemSayGoodbyeCallback particleSystemSayGoodbyeCallback;
         void* userData;
     };
 
@@ -49,9 +49,9 @@ public:
     using ShouldCollideParticleParticleCallback = bool (*)(b2ParticleSystem* particleSystem, int32 particleIndexA, int32 particleIndexB, void* userData);
 
     struct Callbacks {
-        ShouldCollideFixtureFixtureCallback shouldCollideFixtureFixtureCallback = nullptr;
-        ShouldCollideFixtureParticleSystemCallback shouldCollideFixtureParticleSystemCallback = nullptr;
-        ShouldCollideParticleParticleCallback shouldCollideParticleParticleCallback = nullptr;
+        ShouldCollideFixtureFixtureCallback shouldCollideFixtureFixtureCallback;
+        ShouldCollideFixtureParticleSystemCallback shouldCollideFixtureParticleSystemCallback;
+        ShouldCollideParticleParticleCallback shouldCollideParticleParticleCallback;
         void* userData;
     };
 
@@ -145,7 +145,7 @@ public:
     using DrawCircleCallback = void (*)(const b2Vec2& center, float radius, const b2Color& color, void* userData);
     using DrawSolidCircleCallback = void (*)(const b2Vec2& center, float radius, const b2Vec2& axis, const b2Color& color, void* userData);
     using DrawSegmentCallback = void (*)(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color, void* userData);
-    using DrawTransformCallback = void (*)(b2Transform xf, void* userData);
+    using DrawTransformCallback = void (*)(const b2Transform& xf, void* userData);
     using DrawPointCallback = void (*)(const b2Vec2& p, float size, const b2Color& color, void* userData);
 
     struct Callbacks {
@@ -219,6 +219,14 @@ B2WORLD(void, SetDebugDraw, b2DrawWrapper::Callbacks* callbacks) {
     world->SetDebugDraw(new b2DrawWrapper(*callbacks));
 }
 
+B2WORLD(void, SetDebugDrawFlags, uint32 flags) {
+    world->m_debugDraw->SetFlags(flags);
+}
+
+B2WORLD(uint32, GetDebugDrawFlags) {
+    return world->m_debugDraw->GetFlags();
+}
+
 B2WORLD(b2Body*, CreateBody, b2BodyDef* def) {
     return world->CreateBody(def);
 }
@@ -259,13 +267,13 @@ B2WORLD(void, DebugDraw) {
     world->DebugDraw();
 }
 
-B2WORLD(void, QueryAABB, b2QueryCallbackWrapper::Callbacks callbacks, const b2AABB& aabb) {
-    b2QueryCallbackWrapper callback(callbacks);
+B2WORLD(void, QueryAABB, b2QueryCallbackWrapper::Callbacks* callbacks, const b2AABB& aabb) {
+    b2QueryCallbackWrapper callback(*callbacks);
     world->QueryAABB(&callback, aabb);
 }
 
-B2WORLD(void, RayCast, b2RayCastCallbackWrapper::Callbacks callbacks, const b2Vec2& point1, const b2Vec2& point2) {
-    b2RayCastCallbackWrapper callback(callbacks);
+B2WORLD(void, RayCast, b2RayCastCallbackWrapper::Callbacks* callbacks, const b2Vec2& point1, const b2Vec2& point2) {
+    b2RayCastCallbackWrapper callback(*callbacks);
     world->RayCast(&callback, point1, point2);
 }
 
@@ -349,8 +357,8 @@ B2WORLD(void, SetGravity, const b2Vec2& gravity) {
     world->SetGravity(gravity);
 }
 
-B2WORLD(b2Vec2, GetGravity) {
-    return world->GetGravity();
+B2WORLD(b2Vec2_C, GetGravity) {
+    RETURNPOD(b2Vec2_C, world->GetGravity());
 }
 
 B2WORLD(bool, IsLocked) {
@@ -367,4 +375,12 @@ B2WORLD(bool, GetAutoClearForces) {
 
 B2WORLD(void, ShiftOrigin, const b2Vec2& newOrigin) {
     world->ShiftOrigin(newOrigin);
+}
+
+BOX2DCAPI void b2World_LinearStiffness(float& stiffness, float& damping, float frequencyHertz, float dampingRatio, const b2Body* bodyA, const b2Body* bodyB) {
+    b2LinearStiffness(stiffness, damping, frequencyHertz, dampingRatio, bodyA, bodyB);
+}
+
+BOX2DCAPI void b2World_AngularStiffness(float& stiffness, float& damping, float frequencyHertz, float dampingRatio, const b2Body* bodyA, const b2Body* bodyB) {
+    b2AngularStiffness(stiffness, damping, frequencyHertz, dampingRatio, bodyA, bodyB);
 }

@@ -1,8 +1,8 @@
 #include "box2dapi.h"
 
-#define B2FIXTURE(_ret_, _name_, ...) BOX2DCAPI _ret_ b2Fixture##_name_(b2Fixture* fixture, ##__VA_ARGS__)
+#define B2FIXTURE(_ret_, _name_, ...) BOX2DCAPI _ret_ b2Fixture_##_name_(b2Fixture* fixture, ##__VA_ARGS__)
 
-B2FIXTURE(b2Shape::Type, GetType) {
+B2FIXTURE(b2Shape::Type, GetFixtureType) {
     return fixture->GetType();
 }
 
@@ -18,12 +18,12 @@ B2FIXTURE(bool, IsSensor) {
     return fixture->IsSensor();
 }
 
-B2FIXTURE(void, SetFilterData, b2Filter v) {
+B2FIXTURE(void, SetFilterData, const b2Filter& v) {
     fixture->SetFilterData(v);
 }
 
-B2FIXTURE(b2Filter, GetFilterData) {
-    return fixture->GetFilterData();
+B2FIXTURE(b2Filter_C, GetFilterData) {
+    RETURNPOD(b2Filter_C, fixture->GetFilterData());
 }
 
 B2FIXTURE(void, Refilter) {
@@ -50,8 +50,8 @@ B2FIXTURE(void, ComputeDistance, const b2Vec2& p, float* distance, b2Vec2* norma
     fixture->ComputeDistance(p, distance, normal, childIndex);
 }
 
-B2FIXTURE(bool, RayCast, b2RayCastOutput* output, b2RayCastInput input, int32 childIndex) {
-    return fixture->RayCast(output, input, childIndex);
+B2FIXTURE(bool, RayCast, b2RayCastOutput* output, b2RayCastInput* input, int32 childIndex) {
+    return fixture->RayCast(output, *input, childIndex);
 }
 
 B2FIXTURE(void, GetMassData, b2MassData* v) {

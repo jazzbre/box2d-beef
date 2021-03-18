@@ -1,9 +1,9 @@
 #include "box2dapi.h"
 
-#define B2PARTICLESYSTEM(_ret_, _name_, ...) BOX2DCAPI _ret_ b2ParticleSystem##_name_(b2ParticleSystem* particleSystem, ##__VA_ARGS__)
+#define B2PARTICLESYSTEM(_ret_, _name_, ...) BOX2DCAPI _ret_ b2ParticleSystem_##_name_(b2ParticleSystem* particleSystem, ##__VA_ARGS__)
 
-B2PARTICLESYSTEM(int32, CreateParticle, const b2ParticleDef& def) {
-    return particleSystem->CreateParticle(def);
+B2PARTICLESYSTEM(int32, CreateParticle, b2ParticleDef* def) {
+    return particleSystem->CreateParticle(*def);
 }
 
 B2PARTICLESYSTEM(void, DestroyParticle, int32 index, bool callDestructionListener) {
@@ -16,6 +16,18 @@ B2PARTICLESYSTEM(void, DestroyOldestParticle, int32 index, bool callDestructionL
 
 B2PARTICLESYSTEM(void, DestroyParticlesInShape, const b2Shape* shape, const b2Transform& xf, bool callDestructionListener) {
     particleSystem->DestroyParticlesInShape(*shape, xf, callDestructionListener);
+}
+
+B2PARTICLESYSTEM(b2ParticleGroup*, CreateParticleGroup, b2ParticleGroupDef* def) {
+    return particleSystem->CreateParticleGroup(*def);
+}
+
+B2PARTICLESYSTEM(void, JoinParticleGroups, b2ParticleGroup* groupA, b2ParticleGroup* groupB) {
+    particleSystem->JoinParticleGroups(groupA, groupB);
+}
+
+B2PARTICLESYSTEM(void, SplitParticleGroup, b2ParticleGroup* group) {
+    particleSystem->SplitParticleGroup(group);
 }
 
 B2PARTICLESYSTEM(int32, GetParticleGroupCount) {
@@ -178,13 +190,13 @@ B2PARTICLESYSTEM(void, ApplyForce, int32 firstIndex, int32 lastIndex, const b2Ve
     particleSystem->ApplyForce(firstIndex, lastIndex, force);
 }
 
-B2PARTICLESYSTEM(void, QueryAABB, b2QueryCallbackWrapper::Callbacks callbacks, const b2AABB& aabb) {
-    b2QueryCallbackWrapper callback(callbacks);
+B2PARTICLESYSTEM(void, QueryAABB, b2QueryCallbackWrapper::Callbacks* callbacks, const b2AABB& aabb) {
+    b2QueryCallbackWrapper callback(*callbacks);
     particleSystem->QueryAABB(&callback, aabb);
 }
 
-B2PARTICLESYSTEM(void, RayCast, b2RayCastCallbackWrapper::Callbacks callbacks, const b2Vec2& point1, const b2Vec2& point2) {
-    b2RayCastCallbackWrapper callback(callbacks);
+B2PARTICLESYSTEM(void, RayCast, b2RayCastCallbackWrapper::Callbacks* callbacks, const b2Vec2& point1, const b2Vec2& point2) {
+    b2RayCastCallbackWrapper callback(*callbacks);
     particleSystem->RayCast(&callback, point1, point2);
 }
 

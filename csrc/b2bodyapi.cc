@@ -17,36 +17,36 @@ B2BODY(void, DestroyFixture, b2Fixture* fixture) {
 B2BODY(void, SetTransform, const b2Vec2& position, float angle) {
     body->SetTransform(position, angle);
 }
-B2BODY(b2Transform, GetPreviousTransform) {
-    return body->GetPreviousTransform();
+B2BODY(b2Transform_C, GetPreviousTransform) {
+    RETURNPOD(b2Transform_C, body->GetPreviousTransform());
 }
 
-B2BODY(b2Transform, GetTransform) {
-    return body->GetTransform();
+B2BODY(b2Transform_C, GetTransform) {
+    RETURNPOD(b2Transform_C, body->GetTransform());
 }
 
-B2BODY(b2Vec2, GetPosition) {
-    return body->GetPosition();
+B2BODY(b2Vec2_C, GetPosition) {
+    RETURNPOD(b2Vec2_C, body->GetPosition());
 }
 
 B2BODY(float, GetAngle) {
     return body->GetAngle();
 }
 
-B2BODY(b2Vec2, GetWorldCenter) {
-    return body->GetWorldCenter();
+B2BODY(b2Vec2_C, GetWorldCenter) {
+    RETURNPOD(b2Vec2_C, body->GetWorldCenter());
 }
 
-B2BODY(b2Vec2, GetLocalCenter) {
-    return body->GetLocalCenter();
+B2BODY(b2Vec2_C, GetLocalCenter) {
+    RETURNPOD(b2Vec2_C, body->GetLocalCenter());
 }
 
 B2BODY(void, SetLinearVelocity, const b2Vec2& v) {
     body->SetLinearVelocity(v);
 }
 
-B2BODY(b2Vec2, GetLinearVelocity) {
-    return body->GetLinearVelocity();
+B2BODY(b2Vec2_C, GetLinearVelocity) {
+    RETURNPOD(b2Vec2_C, body->GetLinearVelocity());
 }
 
 B2BODY(void, SetAngularVelocity, float omega) {
@@ -95,7 +95,7 @@ B2BODY(b2MassData, GetMassData) {
     return data;
 }
 
-B2BODY(void, SetMassData, b2MassData data) {
+B2BODY(void, SetMassData, const b2MassData& data) {
     body->SetMassData(&data);
 }
 
@@ -103,28 +103,28 @@ B2BODY(void, ResetMassData) {
     body->ResetMassData();
 }
 
-B2BODY(b2Vec2, GetWorldPoint, const b2Vec2& v) {
-    return body->GetWorldPoint(v);
+B2BODY(b2Vec2_C, GetWorldPoint, const b2Vec2& v) {
+    RETURNPOD(b2Vec2_C, body->GetWorldPoint(v));
 }
 
-B2BODY(b2Vec2, GetWorldVector, const b2Vec2& v) {
-    return body->GetWorldVector(v);
+B2BODY(b2Vec2_C, GetWorldVector, const b2Vec2& v) {
+    RETURNPOD(b2Vec2_C, body->GetWorldVector(v));
 }
 
-B2BODY(b2Vec2, GetLocalPoint, const b2Vec2& v) {
-    return body->GetLocalPoint(v);
+B2BODY(b2Vec2_C, GetLocalPoint, const b2Vec2& v) {
+    RETURNPOD(b2Vec2_C, body->GetLocalPoint(v));
 }
 
-B2BODY(b2Vec2, GetLocalVector, const b2Vec2& v) {
-    return body->GetLocalVector(v);
+B2BODY(b2Vec2_C, GetLocalVector, const b2Vec2& v) {
+    RETURNPOD(b2Vec2_C, body->GetLocalVector(v));
 }
 
-B2BODY(b2Vec2, GetLinearVelocityFromWorldPoint, const b2Vec2& v) {
-    return body->GetLinearVelocityFromWorldPoint(v);
+B2BODY(b2Vec2_C, GetLinearVelocityFromWorldPoint, const b2Vec2& v) {
+    RETURNPOD(b2Vec2_C, body->GetLinearVelocityFromWorldPoint(v));
 }
 
-B2BODY(b2Vec2, GetLinearVelocityFromLocalPoint, const b2Vec2& v) {
-    return body->GetLinearVelocityFromLocalPoint(v);
+B2BODY(b2Vec2_C, GetLinearVelocityFromLocalPoint, const b2Vec2& v) {
+    RETURNPOD(b2Vec2_C, body->GetLinearVelocityFromLocalPoint(v));
 }
 
 B2BODY(float, GetLinearDamping) {
@@ -151,11 +151,11 @@ B2BODY(void, SetGravityScale, float v) {
     body->SetGravityScale(v);
 }
 
-B2BODY(void, SetType, b2BodyType v) {
+B2BODY(void, SetBodyType, b2BodyType v) {
     body->SetType(v);
 }
 
-B2BODY(b2BodyType, GetType) {
+B2BODY(b2BodyType, GetBodyType) {
     return body->GetType();
 }
 

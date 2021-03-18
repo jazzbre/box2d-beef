@@ -15,6 +15,34 @@
     }                                                                                                                                                                                                  \
     return _default_ret_;
 
+#define RETURNPOD(_type_, _func_)                                                                                                                                                                      \
+    auto ret_value = _func_;                                                                                                                                                                           \
+    _type_ ret_c_value = (const _type_&)ret_value;                                                                                                                                                     \
+    return ret_c_value;
+
+// b2Vec2_C
+struct b2Vec2_C {
+    float x, y;
+};
+
+// b2Rot_C
+struct b2Rot_C {
+    float s, c;
+};
+
+// b2Transform_C
+struct b2Transform_C {
+    b2Vec2_C p;
+    b2Rot_C q;
+};
+
+// b2Filter_C
+struct b2Filter_C {
+    uint16 categoryBits;
+    uint16 maskBits;
+    int16 groupIndex;
+};
+
 // b2QueryCallbackWrapper
 class b2QueryCallbackWrapper : public b2QueryCallback {
 public:
@@ -29,7 +57,7 @@ public:
         void* userData;
     };
 
-    b2QueryCallbackWrapper(Callbacks _callbacks)
+    b2QueryCallbackWrapper(Callbacks& _callbacks)
         : callbacks(_callbacks) {
     }
 
@@ -45,7 +73,7 @@ public:
         CALLBACKRET(false, shouldQueryParticleSystemCallback, particleSystem);
     }
 
-    Callbacks callbacks;
+    Callbacks& callbacks;
 };
 
 // b2RayCastCallbackWrapper
@@ -62,7 +90,7 @@ public:
         void* userData;
     };
 
-    b2RayCastCallbackWrapper(Callbacks _callbacks)
+    b2RayCastCallbackWrapper(Callbacks& _callbacks)
         : callbacks(_callbacks) {
     }
 
@@ -78,5 +106,5 @@ public:
         CALLBACKRET(true, shouldQueryParticleSystemCallback, particleSystem);
     }
 
-    Callbacks callbacks;
+    Callbacks& callbacks;
 };
