@@ -38,5 +38,7 @@ Example:
 				}
 ```
 
+![](screenshot.png)
+
 ## Future work
 iOS and Android build scripts.
