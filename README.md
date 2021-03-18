@@ -23,19 +23,21 @@ MacOS/Linux can be built and run with provided VSCode project (expects Beef git 
 The library is pure C wrapper, so no classes, just structs and "pointers" , intended for people who wish to wrap it their own way.
 Example:
 ```
-				b2FixtureDef fd = .();
-				fd.shape = shape;
-				fd.density = 20.0f;
-				fd.friction = 0.1f;
+b2Vec2 gravity = .(0.0f, -10.0f);
+var world = World.Create(ref gravity);
+b2FixtureDef fd = .();
+fd.shape = shape;
+fd.density = 20.0f;
+fd.friction = 0.1f;
 
-				for (int i = 0; i < 10; ++i)
-				{
-					b2BodyDef bd = .();
-					bd.type = .b2_dynamicBody;
-					bd.position = .(-6.0f + 1.0f * i, 11.25f);
-					var body = World.CreateBody(world, &bd);
-					Body.CreateFixture(body, &fd);
-				}
+for (int i = 0; i < 10; ++i)
+{
+   b2BodyDef bd = .();
+   bd.type = .b2_dynamicBody;
+   bd.position = .(-6.0f + 1.0f * i, 11.25f);
+   var body = World.CreateBody(world, &bd);
+   Body.CreateFixture(body, &fd);
+}
 ```
 
 ![](screenshot.png)
