@@ -249,7 +249,7 @@ namespace example
 			b2Vec2 d = Body.GetWorldPoint(djd.bodyB, ref djd.localAnchorB) - Body.GetWorldPoint(djd.bodyA, ref
 				djd.localAnchorA); djd.length = d.Length;
 
-			World.LinearStiffness(ref djd.stiffness, ref djd.damping, 1.0f, 1.0f, djd.bodyA, djd.bodyB);
+			Utility.LinearStiffness(ref djd.stiffness, ref djd.damping, 1.0f, 1.0f, djd.bodyA, djd.bodyB);
 			World.CreateJoint(world, &djd);
 			{
 				float radius = 0.2f;
