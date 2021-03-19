@@ -168,8 +168,5 @@ namespace Box2D
 		[LinkName("b2World_GetAutoClearForces")] public static extern bool GetAutoClearForces(b2World* world);
 
 		[LinkName("b2World_ShiftOrigin")] public static extern void ShiftOrigin(b2World* world, ref b2Vec2 newOrigin);
-
-		[LinkName("b2World_LinearStiffness")] public static extern void LinearStiffness(ref float stiffness, ref float damping, float frequencyHertz, float dampingRatio, b2Body* bodyA, b2Body* bodyB);
-		[LinkName("b2World_AngularStiffness")] public static extern void AngularStiffness(ref float stiffness, ref float damping, float frequencyHertz, float dampingRatio, b2Body* bodyA, b2Body* bodyB);
 	}
 }

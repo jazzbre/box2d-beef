@@ -11,7 +11,7 @@ project "box2d"
 	}
 
 	files {
-		path.join(SOURCE_DIR, "box2d/include/*.h"),
+		path.join(SOURCE_DIR, "box2d/include/**.h"),
 		path.join(SOURCE_DIR, "box2d/src/**.cpp"),
 		path.join(SOURCE_DIR, "box2d/src/**.h"),
 		path.join(SOURCE_DIR, "../csrc/*.*"),

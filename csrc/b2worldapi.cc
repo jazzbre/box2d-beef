@@ -376,11 +376,3 @@ B2WORLD(bool, GetAutoClearForces) {
 B2WORLD(void, ShiftOrigin, const b2Vec2& newOrigin) {
     world->ShiftOrigin(newOrigin);
 }
-
-BOX2DCAPI void b2World_LinearStiffness(float& stiffness, float& damping, float frequencyHertz, float dampingRatio, const b2Body* bodyA, const b2Body* bodyB) {
-    b2LinearStiffness(stiffness, damping, frequencyHertz, dampingRatio, bodyA, bodyB);
-}
-
-BOX2DCAPI void b2World_AngularStiffness(float& stiffness, float& damping, float frequencyHertz, float dampingRatio, const b2Body* bodyA, const b2Body* bodyB) {
-    b2AngularStiffness(stiffness, damping, frequencyHertz, dampingRatio, bodyA, bodyB);
-}
