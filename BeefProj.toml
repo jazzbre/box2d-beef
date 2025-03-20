@@ -5,16 +5,16 @@ Dependencies = {corlib = "*"}
 Name = "box2d-beef"
 
 [Configs.Debug.Win64]
-LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\box2dDebug.lib"]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2022\\bin\\box2dDebug.lib"]
 
 [Configs.Release.Win64]
-LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\box2dRelease.lib"]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2022\\bin\\box2dRelease.lib"]
 
 [Configs.Paranoid.Win64]
-LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\box2dRelease.lib"]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2022\\bin\\box2dRelease.lib"]
 
 [Configs.Test.Win64]
-LibPaths = ["$(ProjectDir)\\.build\\win64_vs2019\\bin\\box2dRelease.lib"]
+LibPaths = ["$(ProjectDir)\\.build\\win64_vs2022\\bin\\box2dRelease.lib"]
 
 [Configs.Debug.macOS]
 LibPaths = ["$(ProjectDir)\\.build\\osx-x64\\bin\\libbox2dDebug.a"]
